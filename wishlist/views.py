@@ -17,8 +17,10 @@ from django.urls import reverse
 @login_required(login_url='/wishlist/login/')
 def show_wishlist(request):
     data_barang_wishlist = BarangWishlist.objects.all()
+    cuuser = request.user
     context = {
         'list_barang': data_barang_wishlist,
+        'user': cuuser,
         'nama': 'Kevin Alexander',
         'last_login': request.COOKIES['last_login'],
     }

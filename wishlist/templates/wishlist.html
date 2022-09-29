@@ -1,25 +1,39 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<h5>Nama: </h5>
-<b>{{nama}}</b>
+{% block meta %}
+<title>WishList Lab</title>
+{% endblock meta %}
 
-<table>
-    <tr>
-    <th>Nama Barang</th>
-    <th>Harga Barang</th>
-    <th>Deskripsi</th>
-    </tr>
-    {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
-    {% for barang in list_barang %}
-        <tr>
-            <th>{{barang.nama_barang}}</th>
-            <th>{{barang.harga_barang}}</th>
-            <th>{{barang.deskripsi}}</th>
+{% block content %}
+
+<nav class="navbar navbar-expand-lg bg-primary" style="margin-bottom: 20px;">
+    <div class="container-fluid">
+      <a class="navbar-brand text-bg-primary" href="#">{{nama}}'s WishList</a>
+    <div class="navbar-nav float-end">
+        <p style="margin: auto 20px; color: white;">Selamat datang, {{ user.username }}!</p>
+        <button class="btn btn-danger"><a class = "link-light text-decoration-none" href="{% url 'wishlist:logout' %}">Logout</a></button>
+    </div>
+    </div>
+</nav>
+
+<div style ="margin: 0 20px">
+    <table class="table">
+        <tr class="table-primary">
+        <th>Nama Barang</th>
+        <th>Harga Barang</th>
+        <th>Deskripsi</th>
         </tr>
-    {% endfor %}
-</table>
-<h5>Sesi terakhir login: {{ last_login }}</h5>
-<button><a href="{% url 'wishlist:logout' %}">Logout</a></button>
+        {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
+        {% for barang in list_barang %}
+            <tr>
+                <th>{{barang.nama_barang}}</th>
+                <th>{{barang.harga_barang}}</th>
+                <th>{{barang.deskripsi}}</th>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<h5 style="padding: 10px;">Sesi terakhir login: {{ last_login }}</h5>
 
 {% endblock content %}
