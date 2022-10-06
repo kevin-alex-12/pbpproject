@@ -75,3 +75,15 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('wishlist:login'))
     response.delete_cookie('last_login')
     return response
+
+def show_ajax(request):
+    return render(request, "wishlist_ajax.html")
+
+def add_ajax(request):
+    if request.method == "POST":
+        nama_barang = request.POST['nama_barang']
+        harga_barang = request.POST['harga_barang']
+        deskripsi = request.POST['deskripsi']
+        barang_baru = BarangWishlist.objects.create(nama_barang=nama_barang, harga_barang=harga_barang, deskripsi=deskripsi)
+        return JsonResponse({'error': False, 'msg':'Successful'})
+    return redirect('wishlist:show_wishlist')
